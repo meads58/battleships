@@ -5,5 +5,5 @@ class Marker
   def initialize
     @status = :missed
   end
- 
+
 end

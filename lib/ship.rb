@@ -6,8 +6,6 @@ class Ship
 		@hits_left = 1
 	end
 
-	
-
 	def damage_from_hit
 		@hits_left = @hits_left - 1 
 	end
@@ -15,6 +13,5 @@ class Ship
 	def sunk?
 		hits_left == 0 
 	end
-
 
 end
