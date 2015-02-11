@@ -3,19 +3,20 @@ require 'board'
 describe Board do
   
   let(:board) { Board.new }
-  let(:marker) { double :marker }
 
   it 'has an initial size of 2*2' do
-    expect(board.size.keys).to eq [:a1, :a2, :b1,:b2] 
+    expect(board.grid.keys).to eq [:a1, :a2, :b1,:b2] 
   end
 
-  it 'displays one ship positoned at :a2' do
-    expect(board.display_cell(:a2)).to eq "ship"
+  it 'can place a ship' do
+    board.place_ship(:a1)
+    expect(board.grid.values).to eq ["ship", "water", "water", "water"]
   end
 
-  it 'returns missed status when player chooses :a1' do
-      expect(marker).to receive(:check_guess).and_return :missed
-      expect(board.return_guess(marker)).to eq :missed
+  it 'can check a shot' do
+    board.place_ship(:a1)
+    expect(board.check_shot(:a1)).to eq "Hit!"
   end
+
 
 end

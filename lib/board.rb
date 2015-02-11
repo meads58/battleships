@@ -1,21 +1,20 @@
 class Board
 
-  attr_reader :size
+  attr_reader :grid
 
   def initialize
-    @size = {a1: "water", a2: "ship", b1: "water", b2: "water"}
+    @grid = {a1: "water", a2: "water", b1: "water", b2: "water"}
   end
 
-  def display_cell(cell)
-    @size[cell]
+  def place_ship(position)
+    @grid[position] = "ship"
   end
 
-  def send_guess(guess)
-    @guess = guess
-  end
-
-  def return_guess(marker)
-    marker.check_guess
+  def check_shot(position)
+    if @grid[position] == "ship"
+      return "Hit!"
+    end
   end
 
 end
+
