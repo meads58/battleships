@@ -4,6 +4,7 @@ describe Board do
   
   let(:board) { Board.new }
   let(:ship) { double :ship }
+  let(:submarine) { double :ship }
 
   it 'has an initial size of 2*2' do
     expect(board.grid.keys).to eq [:a1, :a2, :b1,:b2] 
@@ -12,6 +13,11 @@ describe Board do
   it 'can place a ship' do
     board.place_ship(:a1, ship)
     expect(board.grid.values).to eq [ship, "water", "water", "water"]
+  end
+
+  it 'can put a submarine on the board' do
+    board.place_ship(:a1, submarine)
+    expect(board.grid.values).to eq [submarine, submarine, "water", "water"]
   end
 
   it 'returns hit if shot hits ship' do
@@ -29,6 +35,8 @@ describe Board do
   it 'return miss if shots hit water' do
     expect(board.check_shot(:a1)).to eq "Miss!"
   end
+
+
 
   # it 'knows how many ships of size 1 are on the grid' do
   #   board.place_ship(:a1, ship)

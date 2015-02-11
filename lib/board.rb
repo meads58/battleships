@@ -7,6 +7,7 @@ class Board
   end
 
   def place_ship(position, ship)
+    @ship_length = ship.hits_left
     @grid[position] = ship
   end
 
@@ -14,8 +15,8 @@ class Board
     if @grid[position] == "water"
       "Miss!"
         else
-      "Hit!"
       speak_to_ship(@grid[position])
+      "Hit!"
     end
   end
 
@@ -25,3 +26,4 @@ class Board
 
 end
 
+#grid down is just sym.next, going across is the issue
