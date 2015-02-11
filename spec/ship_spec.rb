@@ -22,4 +22,9 @@ describe Ship do
 		expect(ship).not_to be_sunk
 	end
 
+	it 'can make a submarine that can take two hits' do
+		sub = Ship.submarine
+		expect(sub.hits_left).to eq 2
+	end
+
 end
