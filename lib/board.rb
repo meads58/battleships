@@ -36,8 +36,8 @@ class Board
   def put_ship_on_board(ship)
     check_board_boundary
     @arr.each do |value| 
-        raise "Ship already here" if @grid[value] != "water"
-        @grid[value] = ship
+        raise "Ship already here" if grid[value] != "water"
+        grid[value] = ship
      end        
   end
 
@@ -48,7 +48,7 @@ class Board
   end
 
   def check_shot(position)
-    if @grid[position] == "water" 
+    if grid[position] == "water" 
       miss 
     else
      hit!(position)
@@ -70,6 +70,6 @@ class Board
   end
 
   def update_board(position)
-    @grid[position] = "Shit!"
+    grid[position] = "Shit!"
   end
 end
