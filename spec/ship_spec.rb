@@ -27,4 +27,9 @@ describe Ship do
 		expect(sub.hits_left).to eq 2
 	end
 
+	it 'returns sunk message after it has been sunk' do
+		ship.damage_from_hit
+		expect(ship.damage_from_hit).to eq "Your a goner!"
+
+	end
 end

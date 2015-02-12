@@ -8,10 +8,11 @@ class Ship
 
 	def damage_from_hit
 		@hits_left = @hits_left - 1 
+		sunk? ? "Your a goner!" : "Hit!"
 	end
 
 	def sunk?
-		hits_left <= 0 
+		hits_left <= 0
 	end
 
 	def self.submarine
