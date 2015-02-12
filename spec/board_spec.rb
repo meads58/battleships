@@ -12,26 +12,26 @@ describe Board do
 
   it 'can place a ship' do
     allow(ship).to receive(:hits_left).and_return 1
-    board.place_ship(:a1, ship)
+    board.place_ship_horizontal(:a1, ship)
     expect(board.grid.values).to eq [ship, "water", "water", "water"]
   end
 
-  it 'can put a submarine on the board' do
+  it 'can put a submarine on the board horizontally' do
       allow(submarine).to receive(:hits_left).and_return 2
-      board.place_ship(:a1, submarine)
+      board.place_ship_horizontal(:a1, submarine)
       expect(board.grid.values).to eq [submarine, "water", submarine, "water"]
   end
 
   it 'returns hit if shot hits ship' do
     allow(ship).to receive(:hits_left).and_return 1
     allow(ship).to receive(:damage_from_hit).and_return("Hit!")
-    board.place_ship(:a1, ship)
+    board.place_ship_horizontal(:a1, ship)
     expect(board.check_shot(:a1)).to eq "Hit!"
   end
 
   it 'tells ship it has been hit when hit' do
     allow(ship).to receive(:hits_left).and_return 1
-    board.place_ship(:a1, ship)
+    board.place_ship_horizontal(:a1, ship)
     expect(ship).to receive(:damage_from_hit)
     board.speak_to_ship(ship)
   end
@@ -40,12 +40,11 @@ describe Board do
     expect(board.check_shot(:a1)).to eq "Miss!"
   end
 
-
-
-  # it 'knows how many ships of size 1 are on the grid' do
-  #   board.place_ship(:a1, ship)
-  #   expect(board.unsunk_ship_count).to eq 1
-  # end
+  it 'raised error if ship already placed' do
+    allow(ship).to receive(:hits_left).and_return 1
+    board.place_ship_horizontal(:a1, ship)
+    expect( lambda {board.place_ship_horizontal(:a1, ship)}).to raise_error(RuntimeError, 'Ship already here')
+  end
 
 
 end

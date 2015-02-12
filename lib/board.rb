@@ -6,40 +6,46 @@ class Board
     @grid = {a1:"water", a2: "water", b1: "water", b2: "water"}
   end
 
-  # def place_ship(position, ship)  
-  #   @ship_length = ship.hits_left
-  #   @grid[position] = ship
-  # end
+  def place_ship_horizontal(position, ship)
+    column, row = position.to_s.scan(/\d+|[a-zA-Z]+/)
+    @arr = [column]
+    length = ship.hits_left
 
-  def place_ship(position, ship)
-    @letter = position.to_s.gsub(/[^a-zA-Z]/, '')
-    @arr = [@letter]
-    @length = ship.hits_left
-
-    (@length - 1).times do 
-      @arr << @letter.next
-      @letter = @letter.next
-    end
-    string_to_symbol
+    build_position_column(length,column)
+    string_to_symbol(row)
     put_ship_board(ship)
   end
 
-  def string_to_symbol
-    @arr.map! { |value| "#{value}1".to_sym}
+  def build_position_column(length,column)
+    (length - 1).times do 
+      @arr << column.next
+      column = column.next
+    end
+  end
+
+  def string_to_symbol(row)
+    @arr.map! { |value| "#{value}#{row}".to_sym}
   end
 
   def put_ship_board(ship)
-    @arr.each { |value| @grid[value] = ship }
+    @arr.each do |value| 
+      raise "Ship already here" if @grid[value] != "water"
+      @grid[value] = ship
+     end
   end
 
 
   def check_shot(position)
-    if @grid[position] == "water"
-      "Miss!"
-        else
-      speak_to_ship(@grid[position])
-      "Hit!"
-    end
+    @grid[position] == "water" ? miss : hit!(position)
+  end
+
+  def miss
+    "Miss!"
+  end
+
+  def hit!(position)
+    speak_to_ship(@grid[position])
+    "Hit!"
   end
 
   def speak_to_ship(ship)

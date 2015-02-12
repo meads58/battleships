@@ -1,7 +1,13 @@
 class Player
 
-  def choose_ship_location(position, board, ship)
-    board.place_ship(position, ship)
+	attr_accessor :player_board
+
+	def initialize
+		@player_board
+	end
+
+  def choose_ship_location_horizontal(position, board, ship)
+    board.place_ship_horizontal(position, ship)
   end
 
   def take_a_shot(position, board)

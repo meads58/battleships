@@ -7,8 +7,8 @@ describe Player do
   let(:ship) { double :ship }
 
   it 'is able to place a ship on board' do
-    allow(board).to receive(:place_ship)
-    expect(player.choose_ship_location(:a1, board, ship))
+    allow(board).to receive(:place_ship_horizontal)
+    expect(player.choose_ship_location_horizontal(:a1, board,ship))
   end
 
   it 'is able to take a shot' do
