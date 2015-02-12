@@ -16,4 +16,10 @@ describe Player do
     expect(player.take_a_shot(:a1, board))
   end
   
+  it 'alerts player if attempting to shoot at same position' do
+    allow(board).to receive(:check_shot)
+    player.take_a_shot(:a1, board)
+    allow(board).to receive(:check_shot)
+    expect(player.take_a_shot(:a1,board)).to eq "Computer says nooo"
+  end
 end

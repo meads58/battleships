@@ -57,6 +57,7 @@ describe Board do
     expect(board.grid[:a1]).to eq "Shit!"
   end
 
+
 def ship_loader
   allow(ship).to receive(:hits_left).and_return 1
   board.place_ship_horizontal(:a1, ship)
