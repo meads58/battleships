@@ -11,7 +11,7 @@ class Ship
 	end
 
 	def sunk?
-		hits_left == 0 
+		hits_left <= 0 
 	end
 
 	def self.submarine

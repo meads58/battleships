@@ -3,29 +3,27 @@ require 'board'
 describe Board do
   
   let(:board) { Board.new }
-  let(:ship) { double :ship }
-  let(:submarine) { double :ship }
+  let(:ship) { double :ship, hits_left: 1 }
+  let(:submarine) { double :ship, hits_left: 2 }
 
   it 'has an initial size of 2*2' do
     expect(board.grid.keys).to eq [:a1, :a2, :b1,:b2] 
   end
 
   it 'can place a ship' do
-    expect(ship).to receive(:hits_left)
+    allow(ship).to receive(:hits_left).and_return 1
     board.place_ship(:a1, ship)
     expect(board.grid.values).to eq [ship, "water", "water", "water"]
   end
 
-  # it 'can put a submarine on the board' do
-  #   expect(submarine).to receive(:hits_left)
-  #   expect(submarine).to receive(:hits_left)
-  #   board.place_ship(:a1, submarine)
-  #   board.place_ship(:a2, submarine)
-  #   expect(board.grid.values).to eq [submarine, submarine, "water", "water"]
-  # end  test means we have to place submarine twice
+  it 'can put a submarine on the board' do
+      allow(ship).to receive(:hits_left) 
+      board.place_ship(:a1, submarine)
+      expect(board.grid.values).to eq [submarine, "water", submarine, "water"]
+  end
 
   it 'returns hit if shot hits ship' do
-    expect(ship).to receive(:hits_left)
+    allow(ship).to receive(:hits_left).and_return 1
     allow(ship).to receive(:damage_from_hit).and_return("Hit!")
     board.place_ship(:a1, ship)
     expect(board.check_shot(:a1)).to eq "Hit!"
