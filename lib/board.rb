@@ -6,10 +6,13 @@ class Board
     @grid = {a1:"water", a2: "water", b1: "water", b2: "water"}
   end
 
-  def place_ship(position, ship)
+  def place_ship(position, ship)  
     @ship_length = ship.hits_left
     @grid[position] = ship
   end
+
+
+
 
   def check_shot(position)
     if @grid[position] == "water"
