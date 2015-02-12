@@ -6,6 +6,15 @@ class Board
     @grid = {a1:"water", a2: "water", b1: "water", b2: "water"}
   end
 
+  def place_ship_vertical(position, ship)
+    @arr = [position]
+    (ship.hits_left - 1).times do
+    @arr << position.next
+    position = position.next
+    end
+    put_ship_board(ship)
+  end
+
   def place_ship_horizontal(position, ship)
     column, row = position.to_s.scan(/\d+|[a-zA-Z]+/)
     @arr = [column]
@@ -33,7 +42,6 @@ class Board
       @grid[value] = ship
      end
   end
-
 
   def check_shot(position)
     @grid[position] == "water" ? miss : hit!(position)

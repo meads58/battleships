@@ -10,6 +10,10 @@ class Player
     board.place_ship_horizontal(position, ship)
   end
 
+  def choose_ship_location_vertical(position, board, ship)
+    board.place_ship_vertical(position, ship)
+  end
+
   def take_a_shot(position, board)
     board.check_shot(position)
   end
