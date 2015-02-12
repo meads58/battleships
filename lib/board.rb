@@ -12,25 +12,26 @@ class Board
   # end
 
   def place_ship(position, ship)
-    letter = position.to_s.gsub(/[^a-zA-Z]/, '')
-    arr = [letter]
-    length = ship.hits_left
-    # if length > 1
-      (length - 1).times do 
-      arr << letter.next
-      letter = letter.next
-      end
-    # end
+    @letter = position.to_s.gsub(/[^a-zA-Z]/, '')
+    @arr = [@letter]
+    @length = ship.hits_left
 
-    arr.map! do |value|
-      "#{value}1".to_sym
+    (@length - 1).times do 
+      @arr << @letter.next
+      @letter = @letter.next
     end
-
-    arr.each do |x|
-      @grid[x] = ship
-    end
-
+    string_to_symbol
+    put_ship_board(ship)
   end
+
+  def string_to_symbol
+    @arr.map! { |value| "#{value}1".to_sym}
+  end
+
+  def put_ship_board(ship)
+    @arr.each { |value| @grid[value] = ship }
+  end
+
 
   def check_shot(position)
     if @grid[position] == "water"

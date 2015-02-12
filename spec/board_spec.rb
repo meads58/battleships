@@ -29,7 +29,7 @@ describe Board do
     expect(board.check_shot(:a1)).to eq "Hit!"
   end
 
-  it 'should tell ship it has been hit when hit' do
+  it 'tells ship it has been hit when hit' do
     allow(ship).to receive(:hits_left).and_return 1
     board.place_ship(:a1, ship)
     expect(ship).to receive(:damage_from_hit)
