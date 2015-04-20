@@ -1,3 +1,8 @@
+Creating the battleships game logic in Ruby. 
+
+Pairing with Paul we designed the game by defining the necessary classes first then incrementally build up the game. 
+
+
 # Battleships CRC
 
 Game           | Colaborator
